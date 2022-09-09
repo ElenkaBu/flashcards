@@ -1,7 +1,6 @@
 const { EventEmitter } = require('events');
 const readlineSync = require('readline-sync');
 
-
 class View extends EventEmitter {
   #model;
 
@@ -27,47 +26,49 @@ class View extends EventEmitter {
 
   renderStartPage() {
     // здесь попросим у модели список тем и предоставим пользователю выбор
-    let topics = this.#model.getTopic()
-    console.clear()
-    console.log('Пришло время выбрать тему:')
-    console.log()
+    const topics = this.#model.getTopic();
+    console.clear();
+    console.log('Пришло время выбрать тему:');
+    console.log();
     topics.forEach((element, i) => {
-        console.log(`${i + 1}. ${element}`)
-      });
-      console.log()
-      const topic = readlineSync.question('> ');
-      this.emit('topicChosen', topic);
-    }
-
+      console.log(`${i + 1}. ${element}`);
+    });
+    console.log();
+    const index = readlineSync.question('> ');
+    const topic = topics[index - 1];
+    this.emit('topicChosen', topic);
+  }
 
   renderQuestionPage() {
     console.clear();
     let questions = this.#model.getQuestions();
-    let count = 0;
     for (let i = 0; i < questions.length; i++) {
-      let question = questions[i]
+      let question = questions[i];
       console.log(Object.keys(question).toString().toLowerCase());
       const answer = readlineSync.question('> ');
-      if(answer) {
-        if (answer.toLowerCase() === Object.values(question).toString().toLowerCase()) {
-          count++
+      if (answer) {
+        if (answer.toLowerCase() === Object.values(question).toString()) {
+          this.#model.setStatUp();
           console.clear();
           console.log('Ты ответил правильно!');
           console.log();
-          continue
+          continue;
         } else {
           console.clear();
-
-          console.log('Неправильный ответ!');
+          console.log('Неправильно!');
           console.log();
-       }
+          console.log(`Правильный ответ: ${Object.values(question).toString().toLowerCase()}`)
+          console.log();
+        }
       }
     }
+    const count = this.#model.getStat();
     if (count === 0 || count === 1) console.log(`Твой результат ${count} из 5: в следующий раз попробуй подумать получше 🤷`);
     if (count === 2 || count === 3) console.log(`Твой результат ${count} из 5: `);
     if (count === 4 || count === 5) console.log(`Твой результат ${count} из 5: `);
   }
 
 }
+
 
 module.exports = View;
