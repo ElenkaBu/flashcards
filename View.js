@@ -27,6 +27,7 @@ class View extends EventEmitter {
   renderStartPage() {
     // здесь попросим у модели список тем и предоставим пользователю выбор
     const topics = this.#model.getTopic();
+
     console.clear();
     console.log('Пришло время выбрать тему:');
     console.log();
@@ -39,22 +40,26 @@ class View extends EventEmitter {
     this.emit('topicChosen', topic);
   }
 
+
   renderQuestionPage() {
     console.clear();
     let questions = this.#model.getQuestions();
     for (let i = 0; i < questions.length; i++) {
-      let question = questions[i];
-      console.log(Object.keys(question).toString().toLowerCase());
+
+      let question = questions[i]
+      console.log(Object.keys(question).toString());
+
       const answer = readlineSync.question('> ');
       if (answer) {
         if (answer.toLowerCase() === Object.values(question).toString()) {
           this.#model.setStatUp();
           console.clear();
-          console.log('Ты ответил правильно!');
+          console.log('Молодец, все верно!');
           console.log();
           continue;
         } else {
           console.clear();
+
           console.log('Неправильно!');
           console.log();
           console.log(`Правильный ответ: ${Object.values(question).toString().toLowerCase()}`)
@@ -63,9 +68,9 @@ class View extends EventEmitter {
       }
     }
     const count = this.#model.getStat();
-    if (count === 0 || count === 1) console.log(`Твой результат ${count} из 5: в следующий раз попробуй подумать получше 🤷`);
-    if (count === 2 || count === 3) console.log(`Твой результат ${count} из 5: `);
-    if (count === 4 || count === 5) console.log(`Твой результат ${count} из 5: `);
+    if (count === 0 || count === 1) console.log(`Твой результат ${count} из 5: в следующий раз попробуй подумать получше, но главное не расстраивайся 😸`);
+    if (count === 2 || count === 3) console.log(`Твой результат ${count} из 5: В целом неплохо для начала 👻`);
+    if (count === 4 || count === 5) console.log(`Твой результат ${count} из 5: Мегамозг🤖`);
   }
 
 }
