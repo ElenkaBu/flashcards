@@ -1,7 +1,7 @@
 {
   "name": "flashcards",
   "version": "1.0.0",
-  "description": "",
+  "description": "## Введение",
   "main": "runner.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,5 +16,13 @@
     "eslint": "^8.23.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElenkaBu/flashcards.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ElenkaBu/flashcards/issues"
+  },
+  "homepage": "https://github.com/ElenkaBu/flashcards#readme"
 }
