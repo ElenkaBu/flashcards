@@ -1,4 +1,5 @@
 const { EventEmitter } = require('events');
+const readlineSync = require('readline-sync');
 
 class View extends EventEmitter {
   #model;
@@ -16,7 +17,6 @@ class View extends EventEmitter {
     switch (this.#model.getPage()) {
       case 'start':
         return this.renderStartPage();
-      // ...
     }
   }
 
