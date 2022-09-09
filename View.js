@@ -41,27 +41,31 @@ class View extends EventEmitter {
 
 
   renderQuestionPage() {
-    console.clear() 
+    console.clear();
     let questions = this.#model.getQuestions();
+    let count = 0;
     for (let i = 0; i < questions.length; i++) {
       let question = questions[i]
-      console.log(Object.keys(question).toString());
+      console.log(Object.keys(question).toString().toLowerCase());
       const answer = readlineSync.question('> ');
       if(answer) {
-        if (answer === Object.values(question).toString()) {
-          console.clear()
-          console.log('Ты ответил правильно!')
-          console.log()
-          continue;
+        if (answer.toLowerCase() === Object.values(question).toString().toLowerCase()) {
+          count++
+          console.clear();
+          console.log('Ты ответил правильно!');
+          console.log();
+          continue
         } else {
-          {
-            console.clear()
-            console.log('Неправильный ответ!')
-            break;
-          }
+          console.clear();
+
+          console.log('Неправильный ответ!');
+          console.log();
        }
       }
     }
+    if (count === 0 || count === 1) console.log(`Твой результат ${count} из 5: в следующий раз попробуй подумать получше 🤷`);
+    if (count === 2 || count === 3) console.log(`Твой результат ${count} из 5: `);
+    if (count === 4 || count === 5) console.log(`Твой результат ${count} из 5: `);
   }
 
 }
