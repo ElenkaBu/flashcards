@@ -50,11 +50,11 @@ class View extends EventEmitter {
 
       const answer = readlineSync.question('> ');
       if (answer) {
-        if (answer.toLowerCase() === Object.values(question).toString()) {
+        if (answer.toLowerCase() === Object.values(question).toString().toLowerCase()) {
           this.#model.setStatUp();
           console.clear();
           console.log('Молодец, все верно!');
-          console.log();
+          console.log()
           continue;
         } else {
           console.clear();

@@ -45,6 +45,7 @@ class Model extends EventEmitter {
     this.emit('update');
   }
 
+
   defineRank() {
     const count = this.getStat();
     if (count === 0 || count === 1) return `Твой результат ${count} из 5: в следующий раз попробуй подумать получше, но главное не расстраивайся 😸`;
