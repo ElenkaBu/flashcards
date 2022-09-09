@@ -14,6 +14,7 @@ class View extends EventEmitter {
 
   render() {
     // отображаем ту страницу, на которой мы сейчас находимся
+    // eslint-disable-next-line default-case
     switch (this.#model.getPage()) {
       case 'start':
         this.renderStartPage();
@@ -21,7 +22,7 @@ class View extends EventEmitter {
       case 'questions':
         this.renderQuestionPage();
         break;
-    }   
+    }
   }
 
   renderStartPage() {
@@ -40,13 +41,11 @@ class View extends EventEmitter {
     this.emit('topicChosen', topic);
   }
 
-
   renderQuestionPage() {
     console.clear();
-    let questions = this.#model.getQuestions();
-    for (let i = 0; i < questions.length; i++) {
-
-    let question = questions[i]
+    const questions = this.#model.getQuestions();
+    for (let i = 0; i < questions.length; i += 1) {
+      const question = questions[i];
       console.log(Object.keys(question).toString());
 
       const answer = readlineSync.question('> ');
@@ -59,7 +58,6 @@ class View extends EventEmitter {
           continue;
         } else {
           console.clear();
-
           console.log('Неправильно!');
           console.log();
           console.log(`Правильный ответ: ${Object.values(question).toString()}`)
@@ -67,13 +65,9 @@ class View extends EventEmitter {
         }
       }
     }
-    const count = this.#model.getStat();
-    if (count === 0 || count === 1) console.log(`Твой результат ${count} из 5: в следующий раз попробуй подумать получше, но главное не расстраивайся 😸`);
-    if (count === 2 || count === 3) console.log(`Твой результат ${count} из 5: В целом неплохо для начала 👻`);
-    if (count === 4 || count === 5) console.log(`Твой результат ${count} из 5: Мегамозг🤖`);
+    const rank = this.#model.defineRank();
+    console.log(rank);
   }
-
 }
-
 
 module.exports = View;
