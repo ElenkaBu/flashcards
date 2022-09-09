@@ -46,7 +46,7 @@ class View extends EventEmitter {
     let questions = this.#model.getQuestions();
     for (let i = 0; i < questions.length; i++) {
 
-      let question = questions[i]
+    let question = questions[i]
       console.log(Object.keys(question).toString());
 
       const answer = readlineSync.question('> ');
@@ -62,7 +62,7 @@ class View extends EventEmitter {
 
           console.log('Неправильно!');
           console.log();
-          console.log(`Правильный ответ: ${Object.values(question).toString().toLowerCase()}`)
+          console.log(`Правильный ответ: ${Object.values(question).toString()}`)
           console.log();
         }
       }

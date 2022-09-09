@@ -28,13 +28,13 @@ class Model extends EventEmitter {
   // Функция вывода списка тем:
   getTopic() {
     let countTopic = fs.readdirSync('./topics')
-    countTopic = countTopic.map((el) => el.slice(0, -19))
+    countTopic = countTopic.map((el) => el.slice(0, -4));
     return countTopic;
   }
 
   chooseTopic(topic) {
     this.#page = 'questions'
-    const data = fs.readFileSync(`${__dirname}/topics/${topic}_flashcard_data.txt`, 'utf-8')
+    const data = fs.readFileSync(`${__dirname}/topics/${topic}.txt`, 'utf-8');
     let arrOfQuestions = data.split('\n');
     for (let i = 0; i < arrOfQuestions.length; i += 3) {
       let step = {}
