@@ -1,0 +1,14 @@
+Что будет в консоли? console.log('' || undefined || 0 || null)
+null
+
+Верно ли сравнение "ёжик" > "яблоко"?
+да
+
+Что получится, если сложить true + false?
+NaN
+
+console.log('10' + '10' - 10)
+1000
+
+const func = (str1, str2) => console.log((str2 + str1 + +str1).toUpperCase()); Что будет в консоли? func('a', 'b')
+BANAN
