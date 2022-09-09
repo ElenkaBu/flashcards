@@ -21,7 +21,7 @@ class View extends EventEmitter {
       case 'questions':
         this.renderQuestionPage();
         break;
-    }   
+    }
   }
 
   renderStartPage() {
@@ -46,16 +46,16 @@ class View extends EventEmitter {
     let questions = this.#model.getQuestions();
     for (let i = 0; i < questions.length; i++) {
 
-    let question = questions[i]
+      let question = questions[i]
       console.log(Object.keys(question).toString());
 
       const answer = readlineSync.question('> ');
       if (answer) {
-        if (answer.toLowerCase() === Object.values(question).toString()) {
+        if (answer.toLowerCase() === Object.values(question).toString().toLowerCase()) {
           this.#model.setStatUp();
           console.clear();
           console.log('Молодец, все верно!');
-          console.log();
+          console.log()
           continue;
         } else {
           console.clear();
